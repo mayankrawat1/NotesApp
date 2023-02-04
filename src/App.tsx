@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Header from "./components/Header";
+import { Note } from "./models/note.model";
+import { Col, Container, Row } from "react-bootstrap";
+import NotesList from "./components/NotesList";
+import CreateNote from "./components/CreateNote";
+import "./App.css";
 
-function App() {
+const App: React.FC = () => {
+  const [notes, setNotes] = useState<Note[]>([] as Note[]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Container className="mt-5">
+        <Row>
+          <Col>
+            <CreateNote notes={notes} setNotes={setNotes} />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <NotesList notes={notes} setNotes={setNotes} />
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
-}
+};
 
 export default App;
